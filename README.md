@@ -25,7 +25,7 @@ These are starting values. Change them as needed. Valid changes are saved automa
 
 Screenshot counts include the current, unfinished candle. JSON counts include only closed candles; the current candle is saved separately. The panel accepts 20–500 screenshot candles and up to 10,000 closed JSON candles. The JSON count must cover the screenshot.
 
-Click **Export snapshot**. The button is unavailable while work is running. The final status shows the verified screenshot and closed JSON counts for H4, H1, M15 and M5. Drag the title bar to move the panel. Use **− / +** to collapse or expand it. **×** hides it; the **Snapshot Exporter** button opens it again. Position and visibility are saved.
+Click **Export snapshot**. The button is unavailable while work is running. The final status shows the verified screenshot and closed JSON counts for H4, H1, M15 and M5. Drag the title bar to move the panel. Double-click the title bar, or use **− / +**, to collapse or expand it. **×** hides it; the **Snapshot Exporter** button opens it again. Position and visibility are saved.
 
 The script must be run again after restarting MT5. It restores saved counts; it does not export automatically.
 
