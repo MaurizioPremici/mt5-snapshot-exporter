@@ -4,6 +4,10 @@ A manual snapshot tool for MetaTrader 5 on macOS through Wine. It saves four nat
 
 The tool only reads market data, positions and pending orders for the chart's exact symbol. It does not place or manage trades, send files online, or export account identifiers.
 
+![Snapshot Exporter panel and exported GBPUSD M15 chart](docs/snapshot-exporter-preview.jpg)
+
+*The panel alongside an exported chart, showing the frozen Bid, forming candle and verified candle counts.*
+
 ## Use
 
 In MT5, open **Navigator → Scripts → MT5SnapshotExporter**, then run **MT5SnapshotExporter** on the symbol you want to export. The script displays a panel on that chart. It does not require Algo Trading.
