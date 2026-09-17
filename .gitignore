@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.log
+*.ex5
+dist/
+exports/
+.DS_Store
+.env
+.env.*
+MT5Data/

@@ -1,0 +1,1311 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "exporter_version": {
+      "type": "string"
+    },
+    "export_id": {
+      "type": "string"
+    },
+    "attempt_id": {
+      "type": "string"
+    },
+    "attempt_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "symbol_spec": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "digits": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16
+        },
+        "point": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "tick_size": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "contract_size": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "chart_price_basis": {
+          "enum": [
+            "bid",
+            "last",
+            "unknown"
+          ]
+        },
+        "is_custom": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stops_level_points": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "freeze_level_points": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "symbol"
+      ]
+    },
+    "broker_time": {
+      "type": "object",
+      "properties": {
+        "time_basis": {
+          "const": "broker_server"
+        },
+        "timezone_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "utc_offset_seconds_at_reference": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "verified",
+            "unavailable"
+          ]
+        }
+      },
+      "required": [
+        "time_basis",
+        "timezone_name",
+        "utc_offset_seconds_at_reference",
+        "source",
+        "status"
+      ]
+    },
+    "capture_clock": {
+      "type": "object",
+      "properties": {
+        "utc_source": {
+          "type": "string"
+        },
+        "verification_status": {
+          "enum": [
+            "unverified",
+            "verified"
+          ]
+        },
+        "duration_source": {
+          "type": "string"
+        },
+        "server_timestamp_format": {
+          "type": "string"
+        },
+        "utc_resolution_seconds": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "utc_source",
+        "verification_status",
+        "duration_source",
+        "server_timestamp_format",
+        "utc_resolution_seconds"
+      ]
+    },
+    "connection_status": {
+      "type": "object",
+      "properties": {
+        "connected_at_reference": {
+          "type": "boolean"
+        },
+        "connected_at_completion": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "connected_at_reference",
+        "connected_at_completion"
+      ]
+    },
+    "reference_time_utc": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reference_time_server": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "export_started_at_utc": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+    },
+    "export_completed_at_utc": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+    },
+    "snapshot_window_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "data_collection_duration_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "reference_quote": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "bid": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "ask": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "spread_price": {
+              "type": "number",
+              "minimum": 0
+            },
+            "spread_points": {
+              "type": "number",
+              "minimum": 0
+            },
+            "tick_time_server": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+            },
+            "tick_time_msc_raw": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "tick_time_basis": {
+              "const": "broker_server"
+            },
+            "read_started_at_utc": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+            },
+            "read_completed_at_utc": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+            },
+            "tick_age_ms": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "tick_age_unavailable_reason": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "bid",
+            "ask",
+            "spread_price",
+            "spread_points",
+            "tick_time_server",
+            "tick_time_msc_raw",
+            "tick_time_basis",
+            "read_started_at_utc",
+            "read_completed_at_utc",
+            "tick_age_ms",
+            "tick_age_unavailable_reason"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "positions_status": {
+      "enum": [
+        "success",
+        "partial",
+        "error"
+      ]
+    },
+    "positions_observation": {
+      "type": "object",
+      "properties": {
+        "started_at_utc": {
+          "type": "string"
+        },
+        "completed_at_utc": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "started_at_utc",
+        "completed_at_utc"
+      ]
+    },
+    "positions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "position_id": {
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          },
+          "position_ticket": {
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          },
+          "symbol": {
+            "type": "string"
+          },
+          "direction": {
+            "enum": [
+              "buy",
+              "sell"
+            ]
+          },
+          "open_price": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "volume": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "volume_unit": {
+            "const": "lots"
+          },
+          "sl": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tp": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "opened_at_server": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "updated_at_server": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "position_id",
+          "position_ticket",
+          "symbol",
+          "direction",
+          "open_price",
+          "volume",
+          "volume_unit",
+          "sl",
+          "tp",
+          "opened_at_server",
+          "updated_at_server"
+        ]
+      }
+    },
+    "pending_orders_status": {
+      "enum": [
+        "success",
+        "partial",
+        "error"
+      ]
+    },
+    "pending_orders_observation": {
+      "type": "object",
+      "properties": {
+        "started_at_utc": {
+          "type": "string"
+        },
+        "completed_at_utc": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "started_at_utc",
+        "completed_at_utc"
+      ]
+    },
+    "pending_orders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "order_ticket": {
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          },
+          "symbol": {
+            "type": "string"
+          },
+          "order_type": {
+            "enum": [
+              "ORDER_TYPE_BUY_LIMIT",
+              "ORDER_TYPE_SELL_LIMIT",
+              "ORDER_TYPE_BUY_STOP",
+              "ORDER_TYPE_SELL_STOP",
+              "ORDER_TYPE_BUY_STOP_LIMIT",
+              "ORDER_TYPE_SELL_STOP_LIMIT"
+            ]
+          },
+          "order_state": {
+            "type": "string"
+          },
+          "requested_price": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "stop_limit_price": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "volume_remaining": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "volume_unit": {
+            "const": "lots"
+          },
+          "sl": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tp": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "time_type": {
+            "type": "string"
+          },
+          "setup_at_server": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expiration_at_server": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "order_ticket",
+          "symbol",
+          "order_type",
+          "order_state",
+          "requested_price",
+          "stop_limit_price",
+          "volume_remaining",
+          "volume_unit",
+          "sl",
+          "tp",
+          "time_type",
+          "setup_at_server",
+          "expiration_at_server"
+        ]
+      }
+    },
+    "operational_state_check": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "enum": [
+            "unchanged",
+            "unverifiable",
+            "not_verified"
+          ]
+        },
+        "completed_at_utc": {
+          "type": "string"
+        },
+        "comparison": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "result",
+        "completed_at_utc",
+        "comparison",
+        "limit"
+      ]
+    },
+    "status": {
+      "enum": [
+        "complete",
+        "complete_with_warnings",
+        "failed"
+      ]
+    },
+    "quality_warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "affects": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "scope",
+          "message",
+          "affects"
+        ]
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "affects": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "scope",
+          "message",
+          "affects"
+        ]
+      }
+    },
+    "charts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timeframe": {
+            "enum": [
+              "H4",
+              "H1",
+              "M15",
+              "M5"
+            ]
+          },
+          "chart_mode": {
+            "const": "clean_native_candles"
+          },
+          "requested_screenshot_bars": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "actual_screenshot_bars": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "partial_screenshot_bars": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "screenshot_tolerance_bars": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "requested_closed_bars": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "exported_closed_bars": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "history_first_open_server": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+          },
+          "history_last_closed_open_server": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+          },
+          "data_read_started_at_utc": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+          },
+          "data_read_completed_at_utc": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+          },
+          "screenshot_file": {
+            "type": "string",
+            "pattern": "^(H4|H1|M15|M5)\\.png$"
+          },
+          "screenshot_requested_at_utc": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+          },
+          "screenshot_saved_at_utc": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+          },
+          "screenshot_duration_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "screenshot_width": {
+            "type": "integer",
+            "minimum": 800
+          },
+          "screenshot_height": {
+            "type": "integer",
+            "minimum": 600
+          },
+          "visible_first_open_server": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+          },
+          "visible_last_open_server": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+          },
+          "screenshot_includes_forming": {
+            "const": true
+          },
+          "capture_quote": {
+            "type": "object",
+            "properties": {
+              "bid": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "ask": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "spread_price": {
+                "type": "number",
+                "minimum": 0
+              },
+              "spread_points": {
+                "type": "number",
+                "minimum": 0
+              },
+              "tick_time_server": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+              },
+              "tick_time_msc_raw": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "tick_time_basis": {
+                "const": "broker_server"
+              },
+              "read_started_at_utc": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+              },
+              "read_completed_at_utc": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+              },
+              "tick_age_ms": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "tick_age_unavailable_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "bid",
+              "ask",
+              "spread_price",
+              "spread_points",
+              "tick_time_server",
+              "tick_time_msc_raw",
+              "tick_time_basis",
+              "read_started_at_utc",
+              "read_completed_at_utc",
+              "tick_age_ms",
+              "tick_age_unavailable_reason"
+            ]
+          },
+          "closed_candles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "time_open_server": {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "open": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "high": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "low": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "close": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "is_closed": {
+                  "type": "boolean"
+                },
+                "tick_volume": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "spread_points_raw": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "time_open_server",
+                "open",
+                "high",
+                "low",
+                "close",
+                "is_closed",
+                "tick_volume",
+                "spread_points_raw"
+              ]
+            }
+          },
+          "forming_candle": {
+            "type": "object",
+            "properties": {
+              "time_open_server": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+              },
+              "open": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "high": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "low": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "close": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "is_closed": {
+                "type": "boolean"
+              },
+              "tick_volume": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "spread_points_raw": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "time_open_server",
+              "open",
+              "high",
+              "low",
+              "close",
+              "is_closed",
+              "tick_volume",
+              "spread_points_raw"
+            ]
+          },
+          "forming_candle_status": {
+            "const": "available"
+          },
+          "forming_candle_read_started_at_utc": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+          },
+          "forming_candle_read_completed_at_utc": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+          },
+          "forming_values_may_differ": {
+            "const": true
+          },
+          "indicators": {
+            "type": "array",
+            "maxItems": 0
+          },
+          "chart_objects": {
+            "type": "array",
+            "maxItems": 0
+          },
+          "history_status": {
+            "const": "success"
+          },
+          "time_gaps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from_open_server": {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "to_open_server": {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+                },
+                "delta_seconds": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "cause": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "from_open_server",
+                "to_open_server",
+                "delta_seconds",
+                "cause"
+              ]
+            }
+          },
+          "status": {
+            "enum": [
+              "complete",
+              "complete_with_warnings"
+            ]
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "scope": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "affects": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "code",
+                "scope",
+                "message",
+                "affects"
+              ]
+            }
+          },
+          "layout": {
+            "type": "object",
+            "properties": {
+              "right_margin_percent": {
+                "type": "number",
+                "minimum": 10,
+                "maximum": 15
+              },
+              "native_zoom": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 5
+              }
+            },
+            "required": [
+              "right_margin_percent",
+              "native_zoom"
+            ]
+          },
+          "capture_annotations": {
+            "type": "object",
+            "properties": {
+              "quote_line": {
+                "const": "frozen_capture_bid"
+              },
+              "price_scale_label": {
+                "type": "boolean"
+              },
+              "forming_marker": {
+                "type": "boolean"
+              },
+              "forming_open_server": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+              }
+            },
+            "required": [
+              "quote_line",
+              "price_scale_label",
+              "forming_marker",
+              "forming_open_server"
+            ]
+          }
+        },
+        "required": [
+          "timeframe",
+          "chart_mode",
+          "requested_screenshot_bars",
+          "actual_screenshot_bars",
+          "partial_screenshot_bars",
+          "screenshot_tolerance_bars",
+          "requested_closed_bars",
+          "exported_closed_bars",
+          "history_first_open_server",
+          "history_last_closed_open_server",
+          "data_read_started_at_utc",
+          "data_read_completed_at_utc",
+          "screenshot_file",
+          "screenshot_requested_at_utc",
+          "screenshot_saved_at_utc",
+          "screenshot_duration_ms",
+          "screenshot_width",
+          "screenshot_height",
+          "visible_first_open_server",
+          "visible_last_open_server",
+          "screenshot_includes_forming",
+          "capture_quote",
+          "closed_candles",
+          "forming_candle",
+          "forming_candle_status",
+          "forming_candle_read_started_at_utc",
+          "forming_candle_read_completed_at_utc",
+          "forming_values_may_differ",
+          "indicators",
+          "chart_objects",
+          "history_status",
+          "time_gaps",
+          "status",
+          "warnings"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "exporter_version",
+    "export_id",
+    "attempt_id",
+    "attempt_count",
+    "symbol_spec",
+    "broker_time",
+    "capture_clock",
+    "connection_status",
+    "reference_time_utc",
+    "reference_time_server",
+    "export_started_at_utc",
+    "export_completed_at_utc",
+    "snapshot_window_ms",
+    "data_collection_duration_ms",
+    "reference_quote",
+    "positions_status",
+    "positions_observation",
+    "positions",
+    "pending_orders_status",
+    "pending_orders_observation",
+    "pending_orders",
+    "operational_state_check",
+    "status",
+    "quality_warnings",
+    "errors",
+    "charts"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MT5 Snapshot Exporter 1.0",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "complete",
+              "complete_with_warnings"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reference_quote": {
+            "type": "object",
+            "properties": {
+              "bid": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "ask": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "spread_price": {
+                "type": "number",
+                "minimum": 0
+              },
+              "spread_points": {
+                "type": "number",
+                "minimum": 0
+              },
+              "tick_time_server": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+              },
+              "tick_time_msc_raw": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "tick_time_basis": {
+                "const": "broker_server"
+              },
+              "read_started_at_utc": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+              },
+              "read_completed_at_utc": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+              },
+              "tick_age_ms": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "tick_age_unavailable_reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "bid",
+              "ask",
+              "spread_price",
+              "spread_points",
+              "tick_time_server",
+              "tick_time_msc_raw",
+              "tick_time_basis",
+              "read_started_at_utc",
+              "read_completed_at_utc",
+              "tick_age_ms",
+              "tick_age_unavailable_reason"
+            ]
+          },
+          "reference_time_utc": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+          },
+          "symbol_spec": {
+            "type": "object",
+            "properties": {
+              "symbol": {
+                "type": "string"
+              },
+              "digits": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 16
+              },
+              "point": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "tick_size": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "contract_size": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "chart_price_basis": {
+                "enum": [
+                  "bid",
+                  "last",
+                  "unknown"
+                ]
+              },
+              "is_custom": {
+                "anyOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "stops_level_points": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "freeze_level_points": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "symbol",
+              "digits",
+              "point",
+              "tick_size",
+              "contract_size",
+              "chart_price_basis",
+              "is_custom",
+              "stops_level_points",
+              "freeze_level_points"
+            ]
+          },
+          "charts": {
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "errors": {
+            "maxItems": 0
+          },
+          "attempt_count": {
+            "minimum": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "complete"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "quality_warnings": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "errors": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}
